@@ -1,0 +1,49 @@
+---
+- name: Configure Containers
+  hosts: all
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install UFW
+      apt:
+        name: ufw
+        state: present
+
+    - name: Allow HTTP traffic on port 80
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+
+    - name: Allow SSH traffic on port 22
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+
+    - name: Allow HTTPS traffic on port 443
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+        
+    - name: Enable UFW
+      ufw:
+        state: enabled
+        
+    - name: Check UFW status
+      command: ufw status
+      register: ufw_status
+
+    - name: Print UFW status
+      debug:
+        var: ufw_status.stdout
+

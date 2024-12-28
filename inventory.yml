@@ -1,0 +1,15 @@
+all:
+  hosts:
+    load_balancer:
+      ansible_host: 10.51.101.244
+      ansible_user: bd2c
+    container1:
+      ansible_host: 10.51.101.69
+      ansible_user: bd2c
+    container2:
+      ansible_host: 10.51.101.167
+      ansible_user: bd2c
+    container3:
+      ansible_host: 10.51.101.52
+      ansible_user: bd2c
+
